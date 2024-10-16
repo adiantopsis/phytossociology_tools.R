@@ -1,0 +1,5 @@
+source("FitoR.txt")
+data<-read.csv(file="data.csv", sep=";", dec=",")
+data_corrected<-dap.eq(data)
+fitoR(x=data, area=100, VI="cottam", filename="my_result")
+fitoR(x=data_corrected, area=100, VI="cottam", filename="my_result")
