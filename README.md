@@ -14,6 +14,7 @@ dap.eq (input_data, form_factor)
 
 - x: a data frame where the columns represent plots (parc), species (spp), height (H), diameters (dap), or circumferences (cap).
 - ff: form factor; if absent, 0.5 will be used by default.
+  
 At the end of the process, the function returns a new data frame with the equivalent diameters and the volumes of the plants, calculated based on the provided form factor.
 
 Forwarder details are provided inside the archive "FitoR.R".
