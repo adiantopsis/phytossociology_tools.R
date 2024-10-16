@@ -19,7 +19,24 @@ At the end of the process, the function returns a new data frame with the equiva
 
 Forwarder details are provided inside the archive "FitoR.R".
 
+## Function FitoR_camp
+Function fitoR_camp calculates phytosociological parameters for **grassland vegetation**.
+
+The function can be used as follows:
+fitoR(input_data, plot_area_in_m2, 'output_filename')
+
+- x: a data frame where the columns represent plots (parc), species (spp), and absolute cover (cob).
+- area: the area of the sampling units in square meters.
+- filename: the name of the output file for the results, enclosed in single or double quotes.
+
+
+At the end of the process, the function returns a list containing a summary of the data, including: the number of sampling units evaluated,
+the total sampled area, species richness, Shannon-Wiener diversity (nats - calculated based on species cover) and Pielou's evenness.
+
+Forwarder details are provided inside the archive "FitoR_camp.R".
+
 ## Function FitoR
+Function fitoR calculates phytosociological parameters for **forest vegetation**.
 The function can be used as follows:
 fitoR(input_data, plot_area_in_m2, VI_type, 'output_filename')
 
