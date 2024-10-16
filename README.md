@@ -1,4 +1,4 @@
-# phytossociology_R - A Suite of Functions for Vegetation Structure Analysis
+# phytossociology_tools - A Suite of tools for vegetation structure analysis
 Here I provide a suite of functions designed to streamline the analysis of phytosociological data. 
 It includes tools for calculating key ecological indices, generating species abundance tables, and producing detailed visualizations of vegetation structure.
 
@@ -20,7 +20,7 @@ At the end of the process, the function returns a new data frame with the equiva
 Forwarder details are provided inside the archive "FitoR.R".
 
 ## Function FitoR_camp
-Function fitoR_camp calculates phytosociological parameters for **grassland vegetation**.
+Function fitoR_camp calculates phytosociological parameters for **herbaceous layer or grassland**.
 
 The function can be used as follows:
 fitoR(input_data, plot_area_in_m2, 'output_filename')
