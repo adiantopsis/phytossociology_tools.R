@@ -40,7 +40,7 @@
 #> 
 #####> Exemplo
 #>
-#> data <- read.csv(file="data/data.csv", sep=";", dec=",")
+#> data <- read.csv(file="exemple_tab.csv", sep=";", dec=",")
 #> fitoR(x=data, area=100, VI="cottam", filename="my_result")
 #>
 
@@ -198,7 +198,7 @@ cat("Equabilidade de Pielou (J) = ",J, fill=TRUE, file=filename, append=TRUE)
 #> e os volumes das plantas, calculados com base no fator forma informado.
 #>
 #####> Exemplo: 
-#> data <- read.csv(file="data/data.csv", sep=";", dec=",")
+#> data <- read.csv(file="exemple_tab.csv", sep=";", dec=",")
 #> dap.eq (x=data, ff=0.5)
 #> 
 
