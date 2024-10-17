@@ -1,5 +1,5 @@
 ####> Funçao para resumir os dados de inventário florestal por unidade amostral
-####> Para rodar essa funçao depende apenas do pacote "tidyverse"
+####> Para rodar essa funçao depende do pacote "tidyverse" e "vegan"
 
 ####> Como utilizar:
 #>  O arquivo de entrada precisa das seguintes colunas com os nomes exatos em minusculo:
@@ -39,6 +39,8 @@
 
 parc.resume <- function(data){
   require(tidyverse)
+  require(reshape)
+  require(vegan)
   cols = grep('cap', colnames(data))
   ncols = length(cols)
   if (ncols>0) param="cap"
