@@ -1,4 +1,4 @@
-####> Funçao para resumir os dados observados por unidade amostral
+####> Funçao para resumir os dados de inventário florestal por unidade amostral
 ####> Para rodar essa funçao depende apenas do pacote "tidyverse"
 
 ####> Como utilizar:
