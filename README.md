@@ -62,7 +62,7 @@ parc.resume(data = variable_input)
 Values
 
 At the end of the process, the function returns a list consisting of a summary of the data per sampling unit: abundance, richness (it's advisable to remove dead specimens to avoid counting them), Shannon-Wiener diversity (nats),
-mean and standard deviation of height (m), mean and standard deviation of DBH or CBH (cm), Pielou's evenness, and basal area (m²).
+mean and standard deviation of height (m), mean and standard deviation of DBH or CBH, Pielou's evenness, and basal area (m²).
 
 
 
