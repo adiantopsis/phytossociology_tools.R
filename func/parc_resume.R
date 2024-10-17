@@ -1,5 +1,5 @@
 ####> Funçao para resumir os dados de inventário florestal por unidade amostral
-####> Para rodar essa funçao depende do pacote "tidyverse" e "vegan"
+####> Para rodar essa funçao depende dos pacotes "reshape", "tidyverse" e "vegan"
 
 ####> Como utilizar:
 #>  O arquivo de entrada precisa das seguintes colunas com os nomes exatos em minusculo:
