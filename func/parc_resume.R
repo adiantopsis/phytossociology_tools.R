@@ -36,7 +36,7 @@
 #> data <- read.csv(file="example_tab.csv", sep=";", dec=",")
 #> parc.resume(data=data)
 
-
+data= palm
 parc.resume <- function(data){
   require(tidyverse)
   require(reshape)
@@ -60,7 +60,7 @@ parc.resume <- function(data){
   
   
   #Riqueza e abundancia
-  data_clean<-data[-c(which(data$spp=="Morta")),]
+  data_clean<-filter(data, !spp=="Morta")
   data_raw<-data
   ab<-cast(data=data_clean, parc~spp, value = "H", length)
   freq<-ab
