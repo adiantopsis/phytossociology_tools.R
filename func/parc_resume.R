@@ -36,7 +36,6 @@
 #> data <- read.csv(file="example_tab.csv", sep=";", dec=",")
 #> parc.resume(data=data)
 
-data= palm
 parc.resume <- function(data){
   require(tidyverse)
   require(reshape)
