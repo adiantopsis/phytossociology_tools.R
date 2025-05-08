@@ -10,7 +10,7 @@
 ####> Argumentos
 #> A função pode ser usada da seguinte forma: 
 #> fitoR(input_data, area_de_cada_parcela_em_m2, 'nome_do_arquivo'), ou seja,
-#> fitoR(x, area, filename)
+#> fitoR(x, area)
 #>
 #> x: um data frame contendo nas colunas as parcelas (parc), espécies (spp) e cobertura absoluta (cob);  
 #> area: area das unidades amostrais em metros quadrados; 
@@ -25,15 +25,15 @@
 #####> Exemplo
 #>
 #> data_camp <- read.csv(file="example_tab_camp.csv", sep=";", dec=",")
-#> fitoR(x=data_camp, area=1, filename="my_result_camp")
+#> fitoR(x=data_camp, area=1)
 #> 
 
 
-fitoR_camp<-function(x, area, filename)
+fitoR_camp<-function(x, area)
 {
   matriz<-table(x$spp,x$parc)
   
-  x[is.na(x)] <- 0
+  # x[is.na(x)] <- 0
   
   #numero de parcelas
   nparc<-length(levels(as.factor(x$parc)))
@@ -53,9 +53,7 @@ fitoR_camp<-function(x, area, filename)
   CA<-tapply(x$cob, x$spp, sum)
   CR<-(CA/sum(CA))*100
   
-  
-  dim(CR)
-  
+
   #calcula o indice de valor de importancia
   VI<-(CR+FR)/2
   
@@ -67,7 +65,7 @@ fitoR_camp<-function(x, area, filename)
   fito$CR<-round(fito$CR,digits=4)
   fito$VI<-round(fito$VI,digits=4)
   fito <- fito[order(VI, decreasing = TRUE),]
-  print(fito)
+
   
   #calcula os indices de diversidade
   Pi<-CA/sum(CA)
@@ -76,21 +74,46 @@ fitoR_camp<-function(x, area, filename)
   S=nrow(fito)
   J=SW/log(S)
   
-  cat("Numero de parcelas = ",round(nparc,digits=2),"parcelas", fill=TRUE)
-  cat("Area total amostrada = ", round(area.parc,digits=2),"m�", fill=TRUE)
-  cat("Riqueza = ",S,"esp.", fill=TRUE)
-  cat("Indice de Shannon-Wiener (H') = ",SW, fill=TRUE)
-  cat("Equabilidade de Pielou (J) = ",J, fill=TRUE)
+  #parc resume
+  w<-filter(x, !spp %in% c('Rocha', 'Mantilho', 'Morta', 'Areia', 'Solo exposto'))
+  
+  parc_green_cob<-tapply(w$cob, w$parc, sum)
+  
+  n_green<-filter(x, spp %in% c('Rocha', 'Mantilho', 'Morta', 'Areia', 'Solo exposto'))
+  
+  parc_n_green<- tapply(n_green$cob, n_green$parc, sum)
+  
+  parc_spp<-tapply(w$spp, w$parc, length)
+  
+  sum_parc=cbind(parc_spp, parc_green_cob)
   
   
-  if(!missing(filename)) filename = paste(filename, ".csv", sep="") else filename = 'fito.csv'
-  write.table(fito, file = filename, row.names = TRUE, dec=",", sep=";", quote=FALSE, col.names=NA)
-  write.table(' ', file = filename, sep=";", quote=TRUE, append=TRUE, row.names=FALSE, col.names=FALSE)
-  cat("Numero de parcelas = ",round(nparc,digits=2),"parcelas", fill=TRUE, file=filename, append=TRUE)
-  cat("Area total amostrada = ", round(area.parc,digits=2),"m²", fill=TRUE, file=filename, append=TRUE)
-  cat("Riqueza = ",S,"spp.", fill=TRUE, file=filename, append=TRUE)
-  cat("Indice de Shannon-Wiener (H') = ",SW, fill=TRUE, file=filename, append=TRUE)
-  cat("Equabilidade de Pielou (J) = ",J, fill=TRUE, file=filename, append=TRUE)
+  mode_spp <-names(sort(-table(parc_spp)))[1]
+  mode_cob <-names(sort(-table(parc_green_cob)))[1]
+  mean_spp<-mean(parc_spp)
+  mean_cob<-mean(parc_green_cob)
+ 
+  
+  resume = cbind.data.frame(
+    Parâmetros = c(
+      "Numero de parcelas",
+      "Area total amostrada",
+      'Riqueza',
+      'Moda de riqueza por parcela',
+      'Média de riqueza por parcela',
+      'Média de cobertura verde por parcela',
+      "Indice de Shannon-Wiener (H')",
+      "Equabilidade de Pielou (J)"
+    ),
+    Resultado = c(round(nparc, digits = 2), 
+                  round(area.parc, digits = 2),
+                  S,mode_spp, mean_spp, mean_cob,   
+                  round(SW, digits = 2), 
+                  round(J, digits = 2))
+  )
+l <- list(fitossociologia=fito,resumo_ua=sum_parc, resumo_geral=resume)
+  return(l)
+  
   
   
 }
