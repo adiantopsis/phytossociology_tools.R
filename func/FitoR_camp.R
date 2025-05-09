@@ -68,18 +68,18 @@ fitoR_camp<-function(x, area)
 
   
   #calcula os indices de diversidade
-  Pi<-CA/sum(CA)
+  div <- fito[!row.names(fito) %in% c('rocha', 'mantilho', 'morta', 'areia', 'solo exposto', 'Rocha', 'Mantilho', 'Morta', 'Areia', 'Solo exposto'),]
+  Pi<-div$CA/sum(div$CA)
   Pi<-Pi*log(Pi)
   SW=-sum(Pi)
-  S=nrow(fito)
+  S <- nrow(div)
   J=SW/log(S)
   
-  #parc resume
-  w<-filter(x, !spp %in% c('Rocha', 'Mantilho', 'Morta', 'Areia', 'Solo exposto'))
   
+  w<-filter(x, !spp %in% c('rocha', 'mantilho', 'morta', 'areia', 'solo exposto', 'Rocha', 'Mantilho', 'Morta', 'Areia', 'Solo exposto'))
   parc_green_cob<-tapply(w$cob, w$parc, sum)
   
-  n_green<-filter(x, spp %in% c('Rocha', 'Mantilho', 'Morta', 'Areia', 'Solo exposto'))
+  n_green<-filter(x, spp %in% c('rocha', 'mantilho', 'morta', 'areia', 'solo exposto', 'Rocha', 'Mantilho', 'Morta', 'Areia', 'Solo exposto'))
   
   parc_n_green<- tapply(n_green$cob, n_green$parc, sum)
   
